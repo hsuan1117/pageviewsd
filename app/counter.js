@@ -13,8 +13,8 @@ module.exports = {
     },
 
     getKeys(project, callback) {
-        return redis.keys(project + '*', function(err, k){
-            callback(k);
+        return redis.keys(project + '*', function(err, keys){
+            callback(keys);
         });
     },
 
@@ -28,6 +28,14 @@ module.exports = {
         return redis.zrevrange(key, 0, (limit || -1), 'WITHSCORES', function(err, response){
             callback(_.invert(_.fromPairs(_.chunk(response, 2))));
         });
+    },
+
+    mergeKeys(project) {
+        this.getKeys(project, function(keys) {
+            // console.log(keys);
+            // keys.unshift(project + '-merged');
+            // redis.zinterstore.apply(redis, keys);
+        })
     },
 
 

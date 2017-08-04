@@ -9,5 +9,6 @@
     "prefix": "pw"
   },
   "projects": [ "clutch" ],
-  "max_days": 3
+  "max_days": 3,
+  "merge_interval": 5000
 }
