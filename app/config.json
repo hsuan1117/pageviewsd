@@ -1,0 +1,13 @@
+{
+  "listen": {
+    "port": 80
+  },
+  "redis": {
+    "host": "redis",
+    "port": "6379",
+    "db": 0,
+    "prefix": "pw"
+  },
+  "projects": [ "clutch" ],
+  "max_days": 3
+}

@@ -1,6 +1,19 @@
-version '2'
+version: '2'
 
 services:
 
-  app:
-    build: ./
+    app:
+        build: ./
+#        environment:
+#              - NODE_ENV=production
+        tty: true
+        volumes:
+            - ./app:/src/app
+        ports:
+            - 8080:80
+        command: 'npm run watch'
+
+
+
+    redis:
+        image: redis:latest
