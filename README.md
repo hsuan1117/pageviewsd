@@ -40,7 +40,7 @@ docker-compose up -d
 
 ## API 
 
-- http://localhost:8080/hit?p={project}&i={ID} - Hit view, return GIF zeropixel
+- http://localhost:8080/hit/{project}/{ID} - Hit view, return GIF zeropixel
 - http://localhost:8080/get/{project} - Get most viewed IDs, return JSON
 
 where 
@@ -54,7 +54,7 @@ Paste to single.php of your theme
 
 ```html
 <script>
-    (new Image()).src="http://localhost:8080/hit/?p={project}&i=<?php echo (int)$post->ID ?>&r" + Math.random();
+    (new Image()).src="http://localhost:8080/hit/{project}/<?php echo (int)$post->ID ?>?r" + Math.random();
 </script>
 ```
 
