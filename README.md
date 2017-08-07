@@ -1,3 +1,12 @@
+# Simple pageviews counter for select most viewed ids by last N days
+
+Store counts in redis as sorted sets
+
+Used:
+- nodejs (expressjs)
+- redis
+- docker
+
 ## before start
 
 Run:
