@@ -3,9 +3,7 @@ const config = require('./config')
 const debug = require('debug')('redis')
 
 const client = redis.createClient({
-    host: config.redis.host,
-    port: config.redis.port,
-    db: config.redis.db,
+    url: config.redis.url,
     retry_strategy: function (options) {
         if (options.error) {
             debug(options.error);
