@@ -9,7 +9,7 @@ Used:
 
 ## Install
 
-### Run on dev:
+### Run in development mode:
 
 ```sh
 git clone https://github.com/nechehin/pageviewsd.git
@@ -22,7 +22,7 @@ and set config vars in app/config.json. Run application by:
 docker-compose -f docker-compose.yml -f dev.yml up
 ```
 
-### Run on production:
+### Run in production:
 
 ```sh
 git clone https://github.com/nechehin/pageviewsd.git
