@@ -1,6 +1,6 @@
-const express = require('express');
-const counter = require('./../counter');
-const config  = require('./../config');
+const express    = require('express');
+const counter    = require('./../counter');
+const config     = require('./../config');
 const eachSeries = require('async/eachSeries');
 
 const router = express.Router();
@@ -10,7 +10,6 @@ router.get('/', function(req, res) {
     res.setHeader('Content-Type', 'application/json');
 
     const stats = { indexes: {} };
-
 
     counter.getAllKeys(function(keys){
 

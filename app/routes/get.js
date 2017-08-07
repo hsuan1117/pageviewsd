@@ -1,7 +1,7 @@
 const express = require('express');
 const counter = require('./../counter');
-const config = require('./../config');
-const router = express.Router();
+const config  = require('./../config');
+const router  = express.Router();
 
 
 router.get('/:project', function(req, res) {
@@ -28,6 +28,7 @@ router.get('/:project', function(req, res) {
             ids: ids
         });
     }, limit);
+    
 });
 
 module.exports = router;

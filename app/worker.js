@@ -1,7 +1,8 @@
 const counter = require('./counter');
 const config  = require('./config');
-const debug = require('debug')('worker')
-const _ = require('lodash');
+const debug   = require('debug')('worker')
+const _       = require('lodash');
+
 
 module.exports = {
 
