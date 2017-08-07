@@ -35,7 +35,8 @@ router.get('/', function(req, res) {
         return;
     }
 
-    counter.increment(req.query.p, req.query.i);
+    // counter.increment(req.query.p, req.query.i);
+    counter.incrementLocal(req.query.p, req.query.i);
 
     debug('hit %s %d', req.query.p, req.query.i);
 

@@ -20,9 +20,9 @@ router.get('/', function(req, res) {
             stats.indexes[key] = {};
 
             counter.getKeyScores(key, function(scores){
-                stats.indexes[key] = scores;
+                stats.indexes[key]['top-20'] = scores;
                 callback();
-            });
+            }, 20);
 
 
         }, function(){

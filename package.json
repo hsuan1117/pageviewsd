@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node app/app.js",
-    "watch": "DEBUG=http nodemon -L app/app.js"
+    "start": "DEBUG=worker,redis node app/app.js",
+    "watch": "DEBUG=http,worker,counter,redis nodemon -L app/app.js"
   },
   "dependencies": {
     "express": "~4.9.0",
