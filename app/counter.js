@@ -6,8 +6,8 @@ const _ = require('lodash');
 
 const localScore = {};
 
-const counter = {
 
+const counter = {
 
     indexKey(project, date) {
         return project + '-' + date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
@@ -61,7 +61,6 @@ const counter = {
         })
     },
 
-
     setKeysTTL() {
         _.forEach(config.projects, function(project) {
             debug('set ttl for %s keys', project);
@@ -74,7 +73,6 @@ const counter = {
         });
     },
 
-
     initLocalScoreStorage() {
         _.forEach(config.projects, function(project) {
             debug('set local storage for %s keys', project);
@@ -82,12 +80,11 @@ const counter = {
         });
     },
 
-
     batchIncrementFromLocalStorage(project) {
-
+        
         const key = this.indexKey(project, new Date());
         let updated = 0;
-
+        
         _.forIn(localScore[project], function(score, id) {
             if (score) {
                 counter.incrementInKey(key, id, score);
@@ -95,20 +92,17 @@ const counter = {
                 updated++
             }
         });
-
+        
         debug('updated %d keys for %s', updated, project);
     },
-
 
     increment(project, id, score) {
         return this.incrementInKey(this.indexKey(project, new Date()), (score || 1), id );
     },
 
-
     incrementInKey(key, id, score) {
         return redis.zincrby(key, (score || 1), id );
     },
-
 
     incrementLocal(project, id, score) {
         if (id in localScore[project]) {
@@ -118,13 +112,11 @@ const counter = {
         }
     },
 
-
     range(project, callback, limit) {
         return redis.zrevrange(this.mergedKey(project), 0, limit, function(err, ids){
             callback(ids);
         });
     }
-
 
 };
 

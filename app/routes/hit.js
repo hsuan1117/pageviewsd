@@ -10,23 +10,15 @@ const zeroPixel = new Buffer('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAA
 
 function validateHitRequest(req) {
 
-    if (! ('p' in req.query)) {
-        return { code: 400, message: 'Project required: p' };
-    }
-
-    if (!~config.projects.indexOf(req.query.p)) {
+    if (!~config.projects.indexOf(req.params.project)) {
         return { code: 403, message: 'Project not allowed' };
-    }
-
-    if (! ('i' in req.query)) {
-        return { code: 400, message: 'ID required: i' };
     }
 
     return true;
 }
 
 
-router.get('/', function(req, res) {
+router.get('/:project/:id', function(req, res) {
 
     const validateResult = validateHitRequest(req);
 
@@ -35,10 +27,9 @@ router.get('/', function(req, res) {
         return;
     }
 
-    // counter.increment(req.query.p, req.query.i);
-    counter.incrementLocal(req.query.p, req.query.i);
+    counter.incrementLocal(req.params.project, req.params.id);
 
-    debug('hit %s %d', req.query.p, req.query.i);
+    debug('hit %s %d', req.params.project, req.params.id);
 
     // Return zero-pixel
     res.writeHead(200, {

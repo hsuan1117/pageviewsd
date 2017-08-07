@@ -30,4 +30,5 @@ module.exports = {
         this.startMergeKeysWorker();
         callback();
     }
+    
 };

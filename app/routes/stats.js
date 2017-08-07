@@ -1,5 +1,4 @@
 const express = require('express');
-// const debug   = require('debug')('http')
 const counter = require('./../counter');
 const config  = require('./../config');
 const eachSeries = require('async/eachSeries');
