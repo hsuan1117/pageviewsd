@@ -3,16 +3,10 @@ version: '2'
 services:
 
     app:
-        build: ./
         environment:
               - NODE_ENV=dev
         tty: true
-        volumes:
-            - ./app:/src/app
-        ports:
-            - 8080:80
         command: 'npm run watch'
-
 
 
     redis:
