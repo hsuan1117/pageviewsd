@@ -22,7 +22,7 @@ Paste to single.php of your theme
 
 ```html
 <script>
-    (new Image()).src="http://localhost:8080/hit/?p=clutch&i=<?php echo (int)$post->ID ?>&r" + Math.random();
+    (new Image()).src="http://localhost:8080/hit/?p={project}&i=<?php echo (int)$post->ID ?>&r" + Math.random();
 </script>
 ```
 
