@@ -1,7 +1,7 @@
-const redis = require('./redis');
+const redis  = require('./redis');
 const config = require('./config');
-const debug = require('debug')('counter')
-const _ = require('lodash');
+const debug  = require('debug')('counter')
+const _      = require('lodash');
 
 
 const localScore = {};

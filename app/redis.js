@@ -1,6 +1,6 @@
-const redis = require("redis");
+const redis  = require("redis");
 const config = require('./config')
-const debug = require('debug')('redis')
+const debug  = require('debug')('redis')
 
 const client = redis.createClient({
     url: config.redis.url,
