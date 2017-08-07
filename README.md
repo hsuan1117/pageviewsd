@@ -11,6 +11,7 @@ and set config vars
 ## API 
 
 /hit?p={project}&i={ID} - Hit view, return GIF zeropixel
+
 /get/{project} - Get most viewed IDs, return JSON
 
 where {project} - project name from config.json
