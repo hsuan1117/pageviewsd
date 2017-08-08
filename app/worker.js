@@ -8,18 +8,18 @@ module.exports = {
 
     startMergeKeysWorker() {
         setInterval(function(){
-            _.forEach(config.labels, function(project) {
-                debug('merge keys: %s', project);
-                counter.mergeKeys(project);
+            _.forEach(config.labels, function(label) {
+                debug('merge keys: %s', label);
+                counter.mergeKeys(label);
             });
         }, config.merge_interval)
     },
 
     startBatchIncrementScoreWorker() {
         setInterval(function(){
-            _.forEach(config.labels, function(project) {
-                debug('batch increment scores keys: %s', project);
-                counter.batchIncrementFromLocalStorage(project);
+            _.forEach(config.labels, function(label) {
+                debug('batch increment scores keys: %s', label);
+                counter.batchIncrementFromLocalStorage(label);
             });
         }, config.batch_increment_interval)
     },

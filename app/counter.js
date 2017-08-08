@@ -25,14 +25,6 @@ const counter = {
         });
     },
 
-    getAllKeys(callback) {
-        return redis.keys('*', function(err, keys){
-            if (!err) {
-                callback(keys);
-            }
-        });
-    },
-
     getKeyScores(key, callback, limit) {
         return redis.zrevrange(key, 0, (limit || -1), 'WITHSCORES', function(err, response) {
             callback(_.mapValues(_.chunk(response, 2), function(i) {

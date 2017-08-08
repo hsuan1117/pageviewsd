@@ -11,22 +11,31 @@ router.get('/', function(req, res) {
 
     const stats = { indexes: {} };
 
-    counter.getAllKeys(function(keys){
+    eachSeries(config.labels, function(label, callback) {
 
-        eachSeries(keys, function(key, callback){
+        counter.getKeys(label, function(keys){
 
-            stats.indexes[key] = {};
+            eachSeries(keys, function(key, callback2){
 
-            counter.getKeyScores(key, function(scores){
-                stats.indexes[key]['top-20'] = scores;
+                stats.indexes[key] = {};
+
+                counter.getKeyScores(key, function(scores){
+                    stats.indexes[key]['top-20'] = scores;
+                    callback2();
+                }, 20);
+
+
+            }, function(){
                 callback();
-            }, 20);
-
-
-        }, function(){
-            res.json(stats);
+                res.json(stats);
+            });
         });
+
+    }, function(){
+        res.json(stats);
     });
+
+
 
 });
 
