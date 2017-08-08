@@ -38,6 +38,21 @@ Run application by:
 docker-compose up -d
 ```
 
+### Redis connection configuration (example)
+
+Set in app/config.json:
+
+```json
+"redis": {
+    "url": "redis://127.0.0.1:6379?db=0&password=redispass"
+},
+```
+where:
+- 127.0.0.1:6379 - redis host and port
+- db=0 - redis DB number
+- password=redispass - redis auth password
+
+
 ## API 
 
 - http://localhost:8080/hit/{project}/{ID} - Hit view, return GIF zeropixel
