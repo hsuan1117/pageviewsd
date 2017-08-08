@@ -55,12 +55,12 @@ where:
 
 ## API 
 
-- http://localhost:8080/hit/{project}/{ID} - Hit view, return GIF zeropixel
-- http://localhost:8080/get/{project} - Get most viewed IDs, return JSON
+- http://localhost:8080/hit/{label}/{ID} - Hit view, return GIF zeropixel
+- http://localhost:8080/get/{label} - Get most viewed IDs, return JSON
 
 where 
 - http://localhost:8080 - host and port where application running
-- {project} - project name from config.json
+- {label} - counter label from config.json
 
 
 ## Use in Wordpress
@@ -69,10 +69,10 @@ Paste to single.php of your theme
 
 ```html
 <script>
-    (new Image()).src="http://localhost:8080/hit/{project}/<?php echo (int)$post->ID ?>?r" + Math.random();
+    (new Image()).src="http://localhost:8080/hit/{label}/<?php echo (int)$post->ID ?>?r"+Math.random();
 </script>
 ```
 
 where 
 - http://localhost:8080 - host and port where application running
-- {project} - project name from config.json
+- {label} - counter label name from config.json

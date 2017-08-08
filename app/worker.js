@@ -8,7 +8,7 @@ module.exports = {
 
     startMergeKeysWorker() {
         setInterval(function(){
-            _.forEach(config.projects, function(project) {
+            _.forEach(config.labels, function(project) {
                 debug('merge keys: %s', project);
                 counter.mergeKeys(project);
             });
@@ -17,7 +17,7 @@ module.exports = {
 
     startBatchIncrementScoreWorker() {
         setInterval(function(){
-            _.forEach(config.projects, function(project) {
+            _.forEach(config.labels, function(project) {
                 debug('batch increment scores keys: %s', project);
                 counter.batchIncrementFromLocalStorage(project);
             });

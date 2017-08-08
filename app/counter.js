@@ -9,16 +9,16 @@ const localScore = {};
 
 const counter = {
 
-    indexKey(project, date) {
-        return project + '-' + date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+    indexKey(label, date) {
+        return label + '-' + date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
     },
 
-    mergedKey(project) {
-        return project + '-merged';
+    mergedKey(label) {
+        return label + '-merged';
     },
 
-    getKeys(project, callback) {
-        return redis.keys(project + '*', function(err, keys){
+    getKeys(label, callback) {
+        return redis.keys(label + '*', function(err, keys){
             if (!err) {
                 callback(keys);
             }
@@ -44,17 +44,17 @@ const counter = {
         });
     },
 
-    mergeKeys(project) {
-        this.getKeys(project, function(keys) {
+    mergeKeys(label) {
+        this.getKeys(label, function(keys) {
 
             const numberKeys = keys.length;
 
             if (!numberKeys) {
-                debug('mergeKeys: no keys for %s', project);
+                debug('mergeKeys: no keys for %s', label);
                 return;
             }
 
-            const mergedKey = counter.mergedKey(project);
+            const mergedKey = counter.mergedKey(label);
             keys.unshift(mergedKey, numberKeys);
             redis.del(mergedKey);
             redis.zunionstore.apply(redis, keys);
@@ -62,58 +62,58 @@ const counter = {
     },
 
     setKeysTTL() {
-        _.forEach(config.projects, function(project) {
-            debug('set ttl for %s keys', project);
+        _.forEach(config.labels, function(label) {
+            debug('set ttl for %s keys', label);
             for (let i = 0; i < config.max_days; i++) {
                 let date = new Date();
                 date.setDate(date.getDate() - i);
                 const ttl = ((config.max_days-i)*86400 - (date.getHours()*3600));
-                redis.expire(counter.indexKey(project, date), ttl );
+                redis.expire(counter.indexKey(label, date), ttl );
             }
         });
     },
 
     initLocalScoreStorage() {
-        _.forEach(config.projects, function(project) {
-            debug('set local storage for %s keys', project);
-            localScore[project] = {};
+        _.forEach(config.labels, function(label) {
+            debug('set local storage for %s keys', label);
+            localScore[label] = {};
         });
     },
 
-    batchIncrementFromLocalStorage(project) {
+    batchIncrementFromLocalStorage(label) {
         
-        const key = this.indexKey(project, new Date());
+        const key = this.indexKey(label, new Date());
         let updated = 0;
         
-        _.forIn(localScore[project], function(score, id) {
+        _.forIn(localScore[label], function(score, id) {
             if (score) {
                 counter.incrementInKey(key, id, score);
-                localScore[project][id] = 0;
+                localScore[label][id] = 0;
                 updated++
             }
         });
         
-        debug('updated %d keys for %s', updated, project);
+        debug('updated %d keys for %s', updated, label);
     },
 
-    increment(project, id, score) {
-        return this.incrementInKey(this.indexKey(project, new Date()), (score || 1), id );
+    increment(label, id, score) {
+        return this.incrementInKey(this.indexKey(label, new Date()), (score || 1), id );
     },
 
     incrementInKey(key, id, score) {
         return redis.zincrby(key, (score || 1), id );
     },
 
-    incrementLocal(project, id, score) {
-        if (id in localScore[project]) {
-            localScore[project][id] = localScore[project][id] + (score || 1);
+    incrementLocal(label, id, score) {
+        if (id in localScore[label]) {
+            localScore[label][id] = localScore[label][id] + (score || 1);
         } else {
-            localScore[project][id] = (score || 1);
+            localScore[label][id] = (score || 1);
         }
     },
 
-    range(project, callback, limit) {
-        return redis.zrevrange(this.mergedKey(project), 0, limit, function(err, ids){
+    range(label, callback, limit) {
+        return redis.zrevrange(this.mergedKey(label), 0, limit, function(err, ids){
             callback(ids);
         });
     }

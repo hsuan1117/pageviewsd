@@ -4,12 +4,12 @@ const config  = require('./../config');
 const router  = express.Router();
 
 
-router.get('/:project', function(req, res) {
+router.get('/:label', function(req, res) {
 
     res.setHeader('Content-Type', 'application/json');
 
-    if (!~config.projects.indexOf(req.params.project)) {
-        res.status(403).json({ error: 'Project not allowed' });
+    if (!~config.labels.indexOf(req.params.label)) {
+        res.status(403).json({ error: 'Label not allowed' });
         return;
     }
 
@@ -23,7 +23,7 @@ router.get('/:project', function(req, res) {
         return;
     }
 
-    counter.range(req.params.project, function(ids){
+    counter.range(req.params.label, function(ids){
         res.json({
             ids: ids
         });
