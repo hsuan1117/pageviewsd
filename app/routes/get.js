@@ -24,9 +24,7 @@ router.get('/:label', function(req, res) {
     }
 
     counter.range(req.params.label, function(ids){
-        res.json({
-            ids: ids
-        });
+        res.json(ids);
     }, limit);
     
 });
