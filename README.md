@@ -89,7 +89,7 @@ $limit = 10;
 $filter = array( 'posts_per_page' => $limit );
 
 // Get json with ids from pageviewd
-$mostViewedIds = json_decode(file_get_contents('http://localhost:8080/get/clutch?limit=' . $limit), true);
+$mostViewedIds = json_decode(file_get_contents('http://localhost:8080/get/{label}?limit=' . $limit), true);
 
 // If response successful and not empty - add ids to query filter
 // else we get last posts
@@ -99,3 +99,7 @@ if ($mostViewedIds) {
 
 $posts = get_posts($filter);
 ```
+
+where 
+- http://localhost:8080 - host and port where application running
+- {label} - counter label from config.json
