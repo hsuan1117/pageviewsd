@@ -27,7 +27,6 @@ router.get('/', function(req, res) {
 
             }, function(){
                 callback();
-                res.json(stats);
             });
         });
 
