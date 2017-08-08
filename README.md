@@ -65,6 +65,8 @@ where
 
 ## Use in Wordpress
 
+### Install counter
+
 Paste to single.php of your theme
 
 ```html
@@ -76,3 +78,24 @@ Paste to single.php of your theme
 where 
 - http://localhost:8080 - host and port where application running
 - {label} - counter label name from config.json
+
+### Query most viewed posts
+
+```php
+// How many posts we need
+$limit = 10;
+
+// Initial query filter
+$filter = array( 'posts_per_page' => $limit );
+
+// Get json with ids from pageviewd
+$mostViewedIds = json_decode(file_get_contents('http://localhost:8080/get/clutch?limit=' . $limit), true);
+
+// If response successful and not empty - add ids to query filter
+// else we get last posts
+if ($mostViewedIds) {
+    $filter['include'] = $mostViewedIds;
+}
+
+$posts = get_posts($filter);
+```
