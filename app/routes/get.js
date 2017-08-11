@@ -4,7 +4,7 @@ const config  = require('./../config');
 const router  = express.Router();
 
 
-router.get('/:label', function(req, res) {
+function requestHandler(req, res) {
 
     res.setHeader('Content-Type', 'application/json');
 
@@ -23,10 +23,21 @@ router.get('/:label', function(req, res) {
         return;
     }
 
-    counter.range(req.params.label, function(ids){
-        res.json(ids);
-    }, limit);
-    
-});
+    if ('days' in req.params) {
+        // Return for req.params.days period
+        counter.rangeByCountDays(parseInt(req.params.days), req.params.label, function(ids){
+            res.json(ids);
+        }, limit);
+    } else {
+        // Return range for config.max_days period
+        counter.range(req.params.label, function(ids){
+            res.json(ids);
+        }, limit);
+    }
+}
+
+
+router.get('/:label/:days(\\d+)', requestHandler);
+router.get('/:label', requestHandler);
 
 module.exports = router;

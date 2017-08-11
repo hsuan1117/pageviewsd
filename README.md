@@ -56,7 +56,9 @@ where:
 ## API 
 
 - http://localhost:8080/hit/{label}/{ID} - Hit view, return GIF zeropixel
-- http://localhost:8080/get/{label} - Get most viewed IDs, return JSON
+- http://localhost:8080/get/{label} - Get most viewed IDs in config.max_days period, return JSON
+- http://localhost:8080/get/{label}/1 - Get most viewed IDs for today, return JSON
+
 
 where 
 - http://localhost:8080 - host and port where application running

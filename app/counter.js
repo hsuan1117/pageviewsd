@@ -108,6 +108,17 @@ const counter = {
         return redis.zrevrange(this.mergedKey(label), 0, limit, function(err, ids){
             callback(ids);
         });
+    },
+
+    rangeByCountDays(countDays, label, callback, limit) {
+        // TODO: Now only for one day
+        if (countDays === 1) {
+            return redis.zrevrange(this.indexKey(label, new Date()), 0, limit, function (err, ids) {
+                callback(ids);
+            });
+        } else {
+            return this.range(label, callback, limit);
+        }
     }
 
 };
