@@ -10,6 +10,6 @@
   "max_get_limit": 20,
   "merge_interval": 15000,
   "batch_increment_interval": 3000,
-  "keys_cleaner_interval": 20000,
+  "keys_cleaner_interval": 3600000,
   "useragent_skipwords": [ "bot", "spider" ]
 }
