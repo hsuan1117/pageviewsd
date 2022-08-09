@@ -14,7 +14,7 @@ function requestHandler(req, res) {
     }
 
     counter.getKeyScores(req.params.label + '-merged', function(ids){
-        res.json(ids);
+        res.json(Object.keys(ids).map(x=>ids[x]));
     });
 }
 
