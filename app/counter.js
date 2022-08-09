@@ -216,8 +216,7 @@ const counter = {
         } else {
             return this.range(label, callback, limit);
         }
-    }
-
+    },
 };
 
 

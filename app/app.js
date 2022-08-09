@@ -9,6 +9,7 @@ app.disable('x-powered-by');
 
 // Register routes
 app.use('/hit',   require('./routes/hit'));
+app.use('/hot',   require('./routes/hot'));
 app.use('/get',   require('./routes/get'));
 app.use('/stats', require('./routes/stats'));
 

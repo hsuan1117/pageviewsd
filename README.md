@@ -58,6 +58,7 @@ where:
 - http://localhost:8080/hit/{label}/{ID} - Hit view, return GIF zeropixel
 - http://localhost:8080/get/{label} - Get most viewed IDs in config.max_days period, return JSON
 - http://localhost:8080/get/{label}/1 - Get most viewed IDs for today, return JSON
+- http://localhost:8080/stats - Get stats, return JSON
 
 
 where 

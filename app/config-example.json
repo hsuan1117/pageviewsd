@@ -3,9 +3,9 @@
     "port": 80
   },
   "redis": {
-    "url": "redis://redis:6379?db=0"
+    "url": "redis://host.docker.internal:6379?db=0"
   },
-  "labels": [ "clutch" ],
+  "labels": [ "gsattool" ],
   "max_days": 3,
   "max_get_limit": 20,
   "merge_interval": 15000,
