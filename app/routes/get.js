@@ -14,6 +14,8 @@ function requestHandler(req, res) {
     }
 
     counter.getKeyScores(req.params.label, function(ids){
+        console.log(req.params.label)
+        console.log(ids)
         res.json(ids);
     });
 }
