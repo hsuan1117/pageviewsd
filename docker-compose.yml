@@ -12,3 +12,6 @@ services:
         ports:
             - 8080:80
         command: 'npm start'
+
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
