@@ -13,9 +13,7 @@ function requestHandler(req, res) {
         return;
     }
 
-    counter.getKeyScores(req.params.label, function(ids){
-        console.log(req.params.label)
-        console.log(ids)
+    counter.getKeyScores(req.params.label + '-merged', function(ids){
         res.json(ids);
     });
 }
